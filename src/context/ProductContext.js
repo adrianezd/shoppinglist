@@ -11,7 +11,6 @@ export function ProductContextProvider(props) {
 
     const removeProduct = (id) => {
         setProducts(products.filter((product) => product.id !== id));
-        console.log("Producto borrado " , id)
     };
 
     useEffect(() => {
