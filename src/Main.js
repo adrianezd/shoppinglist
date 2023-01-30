@@ -1,12 +1,13 @@
 import React from "react";
 import ListOfProducts from "./components/ListOfProducts";
-import Product from "./components/Product";
+import { ProductContextProvider } from "./context/ProductContext";
 function Main() {
   return (
     <div>
-      <h1 style={{color: "black"}}>Welcome to your shopping cart!</h1>
-      {console.log("Hello World")}
+      <ProductContextProvider>
+      <h1>Welcome to your shopping cart!</h1>
       <ListOfProducts />
+      </ProductContextProvider>
     </div>
   );
 }
