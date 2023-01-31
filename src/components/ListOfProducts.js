@@ -1,13 +1,33 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from '../context/ProductContext'
-import CreateProduct from "./CreateProduct";
 
 
 export function ListOfProducts() {
-  const { products,removeProduct } = useContext(ProductContext);
+  const { products,removeProduct,addProduct } = useContext(ProductContext);
 
+  const [totalMoney, setTotalMoney] = useState(0);
+  const getTotalPrice = () => {
+    let total = 0;
+    products.forEach((product) => {
+      product.price = parseFloat(product.price);
+      total += product.price;
+    });
+    setTotalMoney(total);
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const product = {
+      id: products.length, 
+      product: e.target[0].value,
+      price: e.target[1].value };
+    addProduct(product);
+  }
 
+  useEffect(() => {
+    getTotalPrice();
+  }, [products]);
+ 
   return (
     <>
     <div className="productsList">
@@ -21,9 +41,22 @@ export function ListOfProducts() {
         </div>
       ))}
     </div>
+
     <div>
-      <CreateProduct />
-      </div>
+      <span>Total: {totalMoney}
+      </span>
+    </div>
+    
+    <form onSubmit={handleSubmit}>
+    <div className="CreateProduct">
+      <h1>Create Product</h1>
+        <label>Product</label>
+        <input type="text" />
+        <label>Price</label>
+        <input type="text" />
+        <button>Create</button> 
+    </div>
+    </form>
     </>
   )
 }
