@@ -6,10 +6,7 @@ export default function CreateProduct() {
 
   const { addProduct } = useContext(ProductContext);
 
-  // const handleSubmit = (e) => {
-  //   const product = { product: e.target[0].value, price: e.target[1].value };
-  //   addProduct(product);
-  // }
+  
 
   return (
     <div className="CreateProduct">
