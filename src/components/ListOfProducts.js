@@ -15,6 +15,11 @@ export function ListOfProducts() {
     setTotalMoney(total);
   };
 
+  function clearList() {
+    products.splice(0, products.length);
+    setTotalMoney(0);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const product = {
@@ -37,19 +42,19 @@ export function ListOfProducts() {
           <p>{product.price}</p>
           <button onClick={ 
             () => removeProduct(product.id)
-          }> Borrar Producto </button>
+          }> Remove Item </button>
         </div>
       ))}
     </div>
 
     <div>
-      <span>Total: {totalMoney}
+      <span>Total price of your shopping cart: {totalMoney}
       </span>
     </div>
     
     <form onSubmit={handleSubmit}>
     <div className="CreateProduct">
-      <h1>Create Product</h1>
+      <h1>Create Item</h1>
         <label>Product</label>
         <input type="text" />
         <label>Price</label>
@@ -57,6 +62,9 @@ export function ListOfProducts() {
         <button>Create</button> 
     </div>
     </form>
+    <div className="clearList">
+          <button onClick={clearList}> Clean shopping cart </button>
+    </div>
     </>
   )
 }
